@@ -4,8 +4,8 @@
 
  module.exports = (env, argv) => {
    const SERVER_PATH = (argv.mode === 'production') ?
-     './src/index.js' :
-     './src/app.js'
+     './src/server/server-prod.js' :
+     './src/server/server-dev.js'
 
    return ({
      entry: {
@@ -20,7 +20,7 @@
      target: 'node',
      node: {
        __dirname: false,   
-       __filename: false, 
+       __filename: false,  
      },
      externals: [nodeExternals()], 
      module: {
