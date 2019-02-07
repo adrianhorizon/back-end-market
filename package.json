@@ -5,8 +5,8 @@
   "description": "server apis web market",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently -r \"npm run start:webpack\"",
-    "start:webpack": "nodemon ./dist/server.js",
+    "start": "nodemon ./dist/server.js",
+    "start:webpack": "concurrently -r \"npm run start:webpack\"",
     "start:server": "NODE_ENV=production DEBUG=market* nodemon src/index.js  --exec babel-node",
     "build": "rm -rf dist && webpack --mode production --config webpack.server.config.js",
     "build:prod": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
