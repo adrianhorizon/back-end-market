@@ -2,9 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { product, categories, auth } from './routes'
 
-const app = express()
+const app = express(),
+            DIST_DIR = __dirname
 
 app.use(bodyParser.json())
+app.use(express.static(DIST_DIR))
 app.use(bodyParser.urlencoded({
   extended: true
 }))

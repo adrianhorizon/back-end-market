@@ -6,31 +6,39 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently -r \"npm run start:server\"",
-    "start:server": "NODE_ENV=production DEBUG=market* nodemon index.js --exec babel-node",
-    "build:server": "babel server--out-dir",
+    "start:server": "NODE_ENV=production DEBUG=market* nodemon src/index.js  --exec babel-node",
+    "build": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "bcryptjs": "^2.4.3",
-    "concurrently": "^3.6.1",
-    "debug": "^3.1.0",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
-    "mongodb": "^3.1.10",
-    "mongoose": "^5.2.9",
-    "mongoose-unique-validator": "^2.0.1"
-  },
-  "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^3.6.1",
+    "debug": "^3.1.0",
+    "eslint": "^5.13.0",
+    "eslint-loader": "^2.1.2",
+    "express": "^4.16.3",
+    "jest": "^24.1.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.2.9",
+    "mongoose-unique-validator": "^2.0.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-middleware": "^3.5.2",
+    "webpack-hot-middleware": "^2.24.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
     "nodemon": "^1.18.9"
   }
 }
