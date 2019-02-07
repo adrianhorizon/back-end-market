@@ -3,24 +3,26 @@ import bodyParser from 'body-parser'
 import { product, categories, auth } from './routes'
 import mongoose from 'mongoose'
 import { mongoUrl, port } from './config'
-import 'babel-polyfill';
 
 const app = express(),
             DIST_DIR = __dirname
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
+
+app.use('/api/products', product)
+app.use('/api/categories', categories)
+app.use('/api/auth', auth)
 
 app.use(express.static(DIST_DIR))
 app.use(bodyParser.urlencoded({
   extended: true
 }))
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS')
-  next()
-})
-app.use('/api/products', product)
-app.use('/api/categories', categories)
-app.use('/api/auth', auth)
 
 async function start() {
     mongoose.Promise = global.Promise
